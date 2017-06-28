@@ -1,0 +1,12 @@
+{
+    "name": "treeko/formio-validator",
+    "description": "PHP Validator for Formio forms",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Konrad Słotwiński",
+            "email": "kgslotwinski@gmail.com"
+        }
+    ],
+    "require": {}
+}
