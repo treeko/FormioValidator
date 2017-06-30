@@ -11,7 +11,7 @@ class Numeric extends Validate
 
     public function getErrorMessage()
     {
-        return Message::getErrorMsg(self::NUMERIC);
+        return Message::getError(self::NUMERIC);
     }
 
     public function isValueValid($value)

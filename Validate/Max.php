@@ -11,7 +11,7 @@ class Max extends Validate
 
     public function getErrorMessage()
     {
-        return Message::getErrorMsg(self::MAX) . $this->getOption();
+        return Message::getError(self::MAX) . $this->getOption();
     }
 
     public function isValueValid($value)

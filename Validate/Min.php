@@ -11,7 +11,7 @@ class Min extends Validate
 
     public function getErrorMessage()
     {
-        return Message::getErrorMsg(self::MIN) . $this->getOption();
+        return Message::getError(self::MIN) . $this->getOption();
     }
 
     public function isValueValid($value)

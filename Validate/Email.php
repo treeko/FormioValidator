@@ -11,7 +11,7 @@ class Email extends Validate
 
     public function getErrorMessage()
     {
-        return Message::getErrorMsg(self::EMAIL);
+        return Message::getError(self::EMAIL);
     }
 
     public function isValueValid($value)

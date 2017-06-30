@@ -11,23 +11,29 @@ class Choice extends Validate
 
     public function getErrorMessage()
     {
-        return Message::getErrorMsg(self::CHOICE);
+        return Message::getError(self::CHOICE);
     }
 
     public function isValueValid($value)
     {
-        if (is_array($value)) {
-            foreach ($value as $item) {
-                $valid = $this->isItemValid($item);
-                if ($valid === false) {
-                    return false;
-                }
-            }
-            return true;
-        } else if ($value === null) {
+        if ($value === null) {
             return true;
         }
+
+        if (is_array($value)) {
+            return $this->areItemsValid($value);
+        }
+
         return $this->isItemValid($value);
+    }
+
+    private function areItemsValid($items)
+    {
+        $result = [];
+        foreach ($items as $item) {
+            $result[] = $this->isItemValid($item);
+        }
+        return (in_array(false, $result)) ? false : true;
     }
 
     private function isItemValid($item)

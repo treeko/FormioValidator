@@ -11,7 +11,7 @@ class Minlength extends Validate
 
     public function getErrorMessage()
     {
-        return Message::getErrorMsg(self::MIN_LENGTH) . $this->getOption();
+        return Message::getError(self::MIN_LENGTH) . $this->getOption();
     }
 
     public function isValueValid($value)

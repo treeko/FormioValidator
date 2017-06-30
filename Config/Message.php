@@ -24,7 +24,7 @@ class Message
 
     static public $lang = 'PL_';
 
-    static public function getErrorMsg($type)
+    static public function getError($type)
     {
         return constant('self::'.self::$lang . 'ERROR_' . strtoupper($type));
     }

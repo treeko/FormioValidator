@@ -11,15 +11,14 @@ class Required extends Validate
 
     public function getErrorMessage()
     {
-        return Message::getErrorMsg(self::REQUIRED);
+        return Message::getError(self::REQUIRED);
     }
 
     public function isValueValid($value)
     {
-
         if ($this->getOption() === true && ($value === '' || $value === null)) {
 
-                return false;
+            return false;
         }
         return true;
     }

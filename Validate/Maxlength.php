@@ -11,7 +11,7 @@ class Maxlength extends Validate
 
     public function getErrorMessage()
     {
-        return Message::getErrorMsg(self::MAX_LENGTH) . $this->getOption();
+        return Message::getError(self::MAX_LENGTH) . $this->getOption();
     }
 
     public function isValueValid($value)
