@@ -2,16 +2,16 @@
 
 namespace FormioValidator\Validate;
 
+use FormioValidator\Config\Message;
 use FormioValidator\Model\Validate;
 
 class Maxlength extends Validate
 {
     const MAX_LENGTH = 'maxLength';
-    const MSG_ERROR = 'Value is longer than: ';
 
     public function getErrorMessage()
     {
-        return self::MSG_ERROR . $this->getOption();
+        return Message::getErrorMsg(self::MAX_LENGTH) . $this->getOption();
     }
 
     public function isValueValid($value)

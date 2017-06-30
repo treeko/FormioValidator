@@ -2,16 +2,16 @@
 
 namespace FormioValidator\Validate;
 
+use FormioValidator\Config\Message;
 use FormioValidator\Model\Validate;
 
 class Max extends Validate
 {
     const MAX = 'max';
-    const MSG_ERROR = 'Value is larger than: ';
 
     public function getErrorMessage()
     {
-        return self::MSG_ERROR . $this->getOption();
+        return Message::getErrorMsg(self::MAX) . $this->getOption();
     }
 
     public function isValueValid($value)

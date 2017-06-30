@@ -2,16 +2,16 @@
 
 namespace FormioValidator\Validate;
 
+use FormioValidator\Config\Message;
 use FormioValidator\Model\Validate;
 
 class Min extends Validate
 {
     const MIN = 'min';
-    const MSG_ERROR = 'Value is smaller than: ';
 
     public function getErrorMessage()
     {
-        return self::MSG_ERROR . $this->getOption();
+        return Message::getErrorMsg(self::MIN) . $this->getOption();
     }
 
     public function isValueValid($value)

@@ -4,43 +4,26 @@ namespace FormioValidator\Validator;
 
 use FormioValidator\Error\ValidationError;
 use FormioValidator\Model\Component;
-use FormioValidator\Model\ValidatorInterface;
 
-class ComponentValidator implements ValidatorInterface
+class ComponentValidator
 {
-    private $component;
-    private $value;
-    private $errors = [];
-
-    public function __construct(Component $component, $value)
+    public function validate(Component $component, $value)
     {
-        $this->value = $value;
-        $this->component = $component;
-    }
-
-    public function getErrors()
-    {
-        return $this->errors;
-    }
-
-    public function validate()
-    {
-        if (!empty($this->component->getValidate())) {
-            $this->validateByParameters();
+        $validation = [];
+        if (!empty($component->getValidate())) {
+            $validation = $this->validateComponent($component, $value);
         }
-
-        if (!empty($this->errors)) {
-            return $this->errors;
-        }
-        return true;
+        return (empty($validation)) ? true : $validation;
     }
 
-    private function validateByParameters()
+    private function validateComponent(Component $component, $value)
     {
-        foreach ($this->component->getValidate() as $item) {
-            if ($item->isValueValid($this->value) === false) {
-                $this->errors[] = new ValidationError($this->component->getKey(), $item->getErrorMessage());
+        $result = [];
+        foreach ($component->getValidate() as $validate) {
+            if ($validate->isValueValid($value) === false) {
+                $result[] = new ValidationError($component->getKey(), $validate->getErrorMessage());
             }
         }
+        return $result;
     }
 }

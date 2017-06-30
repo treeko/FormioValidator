@@ -2,7 +2,7 @@
 
 namespace AFormioValidator\Component;
 
-use AFormioValidator\Model\Component;
+use FormioValidator\Model\Component;
 
 class Container extends Component
 {

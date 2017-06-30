@@ -2,16 +2,16 @@
 
 namespace FormioValidator\Validate;
 
+use FormioValidator\Config\Message;
 use FormioValidator\Model\Validate;
 
 class Email extends Validate
 {
     const EMAIL = 'email';
-    const MSG_ERROR = 'Invalid email format';
 
     public function getErrorMessage()
     {
-        return self::MSG_ERROR;
+        return Message::getErrorMsg(self::EMAIL);
     }
 
     public function isValueValid($value)

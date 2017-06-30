@@ -2,16 +2,16 @@
 
 namespace FormioValidator\Validate;
 
+use FormioValidator\Config\Message;
 use FormioValidator\Model\Validate;
 
 class Choice extends Validate
 {
-    const EMAIL = 'choice';
-    const MSG_ERROR = 'Value is not in choices pool';
+    const CHOICE = 'choice';
 
     public function getErrorMessage()
     {
-        return self::MSG_ERROR;
+        return Message::getErrorMsg(self::CHOICE);
     }
 
     public function isValueValid($value)
@@ -24,8 +24,9 @@ class Choice extends Validate
                 }
             }
             return true;
+        } else if ($value === null) {
+            return true;
         }
-
         return $this->isItemValid($value);
     }
 

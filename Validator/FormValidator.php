@@ -3,69 +3,46 @@
 namespace FormioValidator\Validator;
 
 use FormioValidator\Factory\ComponentFactory;
-use FormioValidator\Model\ValidatorInterface;
-use FormioValidator\Traits\ArrayFunctions;
 
-class FormValidator implements ValidatorInterface
+class FormValidator
 {
-    use ArrayFunctions;
 
-    private $form;
-    private $result;
-    private $components = [];
-    private $errors = [];
-
-    public function __construct($form = null, $result = null)
+    public function validate(array $form, array $submission)
     {
-        if ($form !== null) {
-            $this->setForm($form);
-        }
-        if ($result !== null) {
-            $this->setResult($result);
-        }
+        $components = $this->getFormComponents($form);
+        $validation = $this->validateComponents($components, $submission);
+        return ($validation === true) ? true : $validation;
     }
 
-    public function setResult($result)
+    private function getFormComponents($form)
     {
-        $this->result = $result;
-        return $this;
+        return (new ComponentFactory($form))->make()->getProducts();
     }
 
-    public function setForm($form)
+    private function validateComponents(array $components, array $submission, array $result = [])
     {
-        $this->form = $form;
-        $this->setComponents($form);
-        return $this;
-    }
-
-    public function validate()
-    {
-        $this->areResultValuesValid($this->components);
-        if (empty($this->errors)) {
-            return true;
-        } else {
-            return $this->errors;
-        }
-    }
-
-    private function areResultValuesValid($components)
-    {
-
         foreach ($components as $component) {
-            $value = $this->findValueInArrayByKey($this->result, $component->getKey());
-            $validator = new ComponentValidator($component, $value);
-            $validation = $validator->validate();
+
+            $validation = (new ComponentValidator())->validate($component,
+                $this->getValueByKey($submission, $component->getKey()));
+
             if ($validation !== true) {
-                $this->errors = $this->errors + $validation;
+                $result[$component->getKey()] = $validation;
             }
+
             if (!empty($component->getComponents())) {
-                $this->areResultValuesValid($component->getComponents());
+                $this->areResultValuesValid($component->getComponents(), $result);
             }
         }
+        return $result;
     }
 
-    private function setComponents($form)
+    private function getValueByKey(array $array, $key)
     {
-        $this->components = (new ComponentFactory($form))->make()->getProducts();
+        if (key_exists($key, $array)) {
+            return $array[$key];
+        } else {
+            return null;
+        }
     }
 }
