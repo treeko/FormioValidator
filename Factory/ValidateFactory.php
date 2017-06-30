@@ -11,29 +11,30 @@ use FormioValidator\Validate\Required;
 
 class ValidateFactory extends Factory
 {
-    public function make()
+    public function make(array $container)
     {
-        foreach ($this->getContainer() as $item => $value) {
+        $result = [];
+        foreach ($container as $item => $value) {
             if ($value !== null || $value !== '' || $value !== false) {
                 switch ($item) {
                     case Maxlength::MAX_LENGTH:
-                        $this->setProduct(new Maxlength($value));
+                        $result[] = (new Maxlength($value));
                         break;
                     case Minlength::MIN_LENGTH:
-                        $this->setProduct(new Minlength($value));
+                        $result[] = (new Minlength($value));
                         break;
                     case Max::MAX:
-                        $this->setProduct(new Max($value));
+                        $result[] = (new Max($value));
                         break;
                     case Min::MIN:
-                        $this->setProduct(new Min($value));
+                        $result[] = (new Min($value));
                         break;
                     case Required::REQUIRED:
-                        $this->setProduct(new Required($value));
+                        $result[] = (new Required($value));
                         break;
                 }
             }
         }
-        return $this;
+        return $result;
     }
 }

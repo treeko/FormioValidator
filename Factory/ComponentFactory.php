@@ -8,23 +8,19 @@ class ComponentFactory extends Factory
 {
     const COMPONENTS_PATH = 'FormioValidator\Component';
 
-    public function make()
+    public function make(array $container)
     {
-        if (array_key_exists('components', $this->getContainer())) {
-            foreach ($this->getContainer()['components'] as $component) {
-                $this->makeComponent($component);
-            }
+        $result = [];
+        foreach ($container['components'] as $component) {
+            $result[] = $this->makeComponent($component);
         }
-        return $this;
+        return $result;
     }
 
     private function makeComponent($component)
     {
         $class = $this->getComponentClass($component['type']);
-        if (class_exists($class)) {
-            $this->setProduct(new $class($component
-            ));
-        }
+        return new $class($component);
     }
 
     private function getComponentClass($componentType)

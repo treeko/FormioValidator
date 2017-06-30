@@ -11,11 +11,6 @@ abstract class Validate
         $this->option = $option;
     }
 
-    public function setValidationData($validationData)
-    {
-        $this->validationData = $validationData;
-    }
-
     abstract public function getErrorMessage();
 
     abstract public function isValueValid($value);

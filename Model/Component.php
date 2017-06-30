@@ -44,14 +44,14 @@ abstract class Component
     protected function setComponents($component)
     {
         if (array_key_exists('components', $component)) {
-            $this->components = (new ComponentFactory($component['components']))->make()->getProducts();
+            $this->components = (new ComponentFactory())->make($component['components']);
         }
     }
 
     protected function setValidate($component)
     {
         if (array_key_exists('validate', $component)) {
-            $this->validate = (new ValidateFactory($component['validate']))->make()->getProducts();
+            $this->validate = (new ValidateFactory())->make($component['validate']);
         }
     }
 
