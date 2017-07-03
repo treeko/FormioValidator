@@ -13,6 +13,7 @@ class ComponentValidator
         if (!empty($component->getValidate())) {
             $validation = $this->validateComponent($component, $value);
         }
+
         return (empty($validation)) ? true : $validation;
     }
 

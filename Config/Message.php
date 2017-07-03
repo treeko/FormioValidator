@@ -17,8 +17,8 @@ class Message
     const PL_ERROR_EMAIL = 'Nieprawidłowy format adresu email';
     const PL_ERROR_MAX = 'Wynik jest większy niż: ';
     const PL_ERROR_MIN = 'Wynik jest mniejszy niż: ';
-    const PL_ERROR_MAXLENGTH = 'Wynik jest krótszy niż: ';
-    const PL_ERROR_MINLENGTH = 'Wynik jest dłuższy niż: ';
+    const PL_ERROR_MAXLENGTH = 'Wynik jest dłuższy niż: ';
+    const PL_ERROR_MINLENGTH = 'Wynik jest krótszy niż: ';
     const PL_ERROR_NUMERIC = 'Wynik nie jest liczbą';
     const PL_ERROR_REQUIRED = 'Wynik jest wymagany';
 

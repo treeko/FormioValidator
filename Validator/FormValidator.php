@@ -11,12 +11,12 @@ class FormValidator
     {
         $components = $this->getFormComponents($form);
         $validation = $this->validateComponents($components, $submission);
-        return ($validation === true) ? true : $validation;
+        return (empty($validation)) ? true : $validation;
     }
 
     private function getFormComponents($form)
     {
-        return (new ComponentFactory())->make($form);
+        return (new ComponentFactory())->make($form['components']);
     }
 
     private function validateComponents(array $components, array $submission, array $result = [])
@@ -31,7 +31,7 @@ class FormValidator
             }
 
             if (!empty($component->getComponents())) {
-                $this->validateComponents($component->getComponents(), $result);
+                $this->validateComponents($component->getComponents(), $submission, $result);
             }
         }
         return $result;

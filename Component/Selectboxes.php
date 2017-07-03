@@ -9,6 +9,6 @@ class Selectboxes extends Component
 {
     public function addCustomValidation()
     {
-        $this->validate[] = new Choice($this->component['data']['values']);
+        $this->validate[] = new Choice($this->component['values']);
     }
 }

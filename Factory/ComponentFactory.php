@@ -11,7 +11,7 @@ class ComponentFactory extends Factory
     public function make(array $container)
     {
         $result = [];
-        foreach ($container['components'] as $component) {
+        foreach ($container as $component) {
             $result[] = $this->makeComponent($component);
         }
         return $result;

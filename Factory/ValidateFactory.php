@@ -15,7 +15,7 @@ class ValidateFactory extends Factory
     {
         $result = [];
         foreach ($container as $item => $value) {
-            if ($value !== null || $value !== '' || $value !== false) {
+            if ($value !== null && $value !== '' && $value !== false) {
                 switch ($item) {
                     case Maxlength::MAX_LENGTH:
                         $result[] = (new Maxlength($value));
